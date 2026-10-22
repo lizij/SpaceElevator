@@ -80,12 +80,50 @@ dist/                   唯一部署产物（gitignore），可整体静态托�
 - 预构建静态包若来自第三方平台，需移除其平台引导数据与品牌标识、把运行时探测静默，
   并保证在纯静态托管下功能完整、控制台无报错。
 
-## 8. 部署
+## 8. 部署到 GitHub Pages
 
-- `.github/workflows/deploy.yml`：push 到 `main` 即在干净环境执行 `npm run build`
-  并把 `dist/` 发布到 GitHub Pages（一次性部署首页与全部作品）。首次启用需在仓库
-  **Settings → Pages → Source** 选择 **GitHub Actions**。
-- 所有资源相对路径，站点可部署在仓库项目页子路径；`dist/` 也可直接放到任意静态托管。
+### 8.1 发布方式（gh-pages 分支模式）
+
+采用经典的 **`peaceiris/actions-gh-pages`** 模式（与各实验原工程的做法一致）：
+
+- `.github/workflows/deploy.yml` 在 push 到 `main` 时，于干净的 ubuntu + Node 22 环境执行
+  `npm run build`，然后用内置 `GITHUB_TOKEN` 把 `dist/` 以 **orphan 分支**方式强制推送到
+  远程 **`gh-pages`** 分支（`force_orphan: true`、`enable_jekyll: false`）。
+- 产物 = 站点根：`gh-pages` 分支根目录直接是首页 `index.html`、`projects/`、`thumbs/`，
+  没有 Jekyll 构建环节（`.nojekyll` 由 Action 自动生成）。
+- 部署 URL 为仓库项目页：`https://<user>.github.io/<repo>/`。
+- 所有资源均为相对路径（`base: './'`、返回按钮用 `../../../index.html`），因此站点放在
+  项目页子路径下也能正常工作；`dist/` 也可直接丢到任意静态托管。
+
+### 8.2 新仓库首次上线（重要：必须手动做一次）
+
+workflow 成功、`gh-pages` 分支存在，**不等于站点已启用**。全新仓库第一次使用 Pages，
+GitHub 强制要求在网页设置里选一次发布源，这一步**无法**由 workflow 内置的 `GITHUB_TOKEN`
+或 git SSH 推送代替（它们有推送/部署权限，但没有"创建 Pages 站点"的管理权限）：
+
+1. 先 push `main`，确认 Actions 里的 Deploy 工作流跑绿、远程出现 `gh-pages` 分支；
+2. 打开 **Settings → Pages → Build and deployment**；
+3. **Source 选择 `Deploy from a branch`**（不是 "GitHub Actions"）；
+4. **Branch 选 `gh-pages`，目录选 `/ (root)`，Save**。
+
+保存后通常 30 秒~1 分钟站点生效，无需再次触发构建。此后每次 push `main` 都会自动更新，
+不必再动设置。（已启用过 Pages 的老仓库无此步骤，这也是"有的仓库好像不用配置"的原因。）
+
+> 备选模式：也可用官方 `configure-pages` + `upload-pages-artifact` + `deploy-pages`
+> （artifact 模式，无 gh-pages 分支），但那时 Source 必须选 "GitHub Actions"。
+> 两种模式二选一，本仓库固定使用上面的 gh-pages 分支模式。
+
+### 8.3 排障
+
+- **站点 404**：先看 Actions 是否成功、`gh-pages` 分支是否存在且根目录有 `index.html`；
+  再确认 Settings → Pages 的 Source 是否为 `gh-pages / root`（新仓库最常见原因就是没做 8.2）。
+  注意 github.io 对未部署站点返回的是 GitHub 自己的 404 页（`server: GitHub.com`），
+  与我们应用内的 404 不是一回事。
+- **子项目白屏 / 应用内 404**：多为前端路由不接受以 `/index.html` 结尾的路径，或资源用了
+  绝对路径。合集已用相对路径、目录形式链接，并对预构建包做了 basename/路径规范化。
+- **CDN 延迟**：部署成功后边缘节点最长可能有 1–2 分钟缓存延迟，强刷或稍候再试。
+- **不要在 Pages 源里放参考图**：调研用美术集只随 `main` 存档，不进入 `dist/`/`gh-pages`。
+- 验证线上时不要只看 HTTP 状态：用真实浏览器进每个项目确认 canvas 渲染、返回按钮可回首页。
 
 ## 9. 改动后的验收清单
 
@@ -95,3 +133,4 @@ dist/                   唯一部署产物（gitignore），可整体静态托�
 - [ ] 每个作品（及额外 html）顶部返回按钮能回到首页，含 `/<repo>/` 子路径场景
 - [ ] 桌面与移动视口抽查；控制台无错误（各项目原有的无害 warning 除外）
 - [ ] 新增/改动实验已在 `projects.registry.mjs` 登记，缩略图已更新
+- [ ] 影响部署时：push 后 Actions 跑绿、`gh-pages` 已更新，线上各入口实测 200
