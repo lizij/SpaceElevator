@@ -1,52 +1,43 @@
-name: Deploy Space Elevator Lab to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+# 经典 gh-pages 分支发布模式：构建后把 dist/ 推到 orphan 的 gh-pages 分支，
+# GitHub 检测到 gh-pages 分支即自动提供 Pages（无需在 Settings 手动选择 Source）
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
       - name: Build collection
-        # 编排脚本会为每个子项目执行 npm install（显式公共 registry）+ vite build，
-        # static 类型项目直接拷贝；最终汇总到根 dist/
+        # 编排脚本会为每个子项目 npm install + build，并把全部产物汇总到根 dist/
         env:
           npm_config_registry: https://registry.npmjs.org/
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Publish gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
