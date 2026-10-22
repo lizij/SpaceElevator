@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#05090d" />
+    <meta
+      name="description"
+      content="《流浪地球2》太空电梯三维复现：90,000 公里轨道电梯、216 根碳纳米缆索、海上基座与九部轿厢。可拖动旋转、缩放观察细节。"
+    />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 2v28M4 8h24M7 15h18M10 22h12%27 stroke=%27%237fd4ff%27 stroke-width=%272%27 stroke-linecap=%27round%27/%3E%3C/svg%3E" />
+    <title>太空电梯 · THE SPACE ELEVATOR</title>
+    <script type="module" crossorigin src="./assets/index-Ii4gAqe3.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CH4kgiXt.css">
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="webgl" aria-label="太空电梯三维场景"></canvas>
+
+      <!-- ── Loading ───────────────────────────────────────────── -->
+      <div id="loading" class="loading">
+        <div class="loading-grid"></div>
+        <div class="loader-inner">
+          <div class="loader-emblem">
+            <svg viewBox="0 0 76 76" aria-hidden="true">
+              <circle cx="38" cy="38" r="31" />
+              <circle cx="38" cy="38" r="22" class="thin" />
+              <path d="M38 6v64" class="thin" />
+              <path d="M30 22l8-8 8 8M30 54l8 8 8-8" />
+              <path d="M22 38h32" class="thin" />
+            </svg>
+          </div>
+          <p class="kicker">UEG · 联合政府空间电梯工程</p>
+          <h2>太空电梯</h2>
+          <p class="en">THE SPACE ELEVATOR</p>
+          <div class="loader-bar"><i id="loader-fill"></i></div>
+          <div class="loader-meta">
+            <span id="loader-text">正在建立缆索连接…</span>
+            <span id="loader-pct">0%</span>
+          </div>
+        </div>
+        <div class="loading-foot">
+          <span>《流浪地球2》同人三维复现</span>
+          <span>FAN RECONSTRUCTION · 90,000 KM</span>
+        </div>
+      </div>
+
+      <div id="fatal" class="fatal" hidden>
+        <h3>场景初始化失败</h3>
+        <p id="fatal-text"></p>
+      </div>
+
+      <div class="scene-fade" id="scene-fade"></div>
+
+      <!-- ── Brand ─────────────────────────────────────────────── -->
+      <header class="hud brand">
+        <div class="brand-row">
+          <div class="brand-emblem" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="brand-text">
+            <p class="kicker">UEG SPACE ELEVATOR PROGRAM</p>
+            <h1>太空电梯</h1>
+            <p class="sub"><b>THE SPACE ELEVATOR</b><span>·</span>《流浪地球2》三维复现</p>
+          </div>
+        </div>
+        <div class="brand-tags">
+          <span>90,000 KM</span><span>216 CABLES</span><span>9 CARS</span>
+        </div>
+      </header>
+
+      <!-- ── Top actions ───────────────────────────────────────── -->
+      <div class="hud top-actions">
+        <button class="chip" data-action="theme" aria-label="切换昼夜">
+          <svg class="ico-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1" />
+          </svg>
+          <span id="theme-label">晨昏</span>
+        </button>
+        <button class="chip" data-action="sound" aria-label="切换声音">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9v6h3.5L12 19V5L7.5 9H4z" />
+            <path id="sound-wave" d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" />
+          </svg>
+          <span id="sound-label">静音</span>
+        </button>
+        <button class="chip" data-action="fullscreen" aria-label="全屏">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
+          </svg>
+          <span>全屏</span>
+        </button>
+        <button class="chip icon-only" data-action="help" aria-label="说明">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M9.6 9.2a2.5 2.5 0 114.2 2.2c-.9.7-1.8 1.2-1.8 2.6M12 17.4v.1" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- ── Specs ─────────────────────────────────────────────── -->
+      <aside class="hud specs" id="specs">
+        <p class="panel-kicker">SYSTEM SPECIFICATION</p>
+        <dl>
+          <div><dt>系统总高</dt><dd>90,000 <small>km</small></dd></div>
+          <div><dt>同步轨道站</dt><dd>36,000 <small>km</small></dd></div>
+          <div><dt>碳纳米缆索</dt><dd>216 <small>根</small></dd></div>
+          <div><dt>轿厢</dt><dd>9 <small>部</small></dd></div>
+          <div><dt>海上基座</dt><dd>Ø3 × 2 <small>km</small></dd></div>
+        </dl>
+        <p class="spec-note">
+          依据官方公开美术设定重建：三座主塔集群、十二座发射塔与圆形发射平台，基座下设阻尼器与驱动平台。
+        </p>
+      </aside>
+
+      <!-- ── Orbit scale ruler ─────────────────────────────────── -->
+      <div class="hud ruler" id="ruler" hidden>
+        <div class="ruler-track">
+          <i class="ruler-fill"></i>
+          <i class="ruler-mark" id="ruler-mark"></i>
+        </div>
+        <div class="ruler-ticks">
+          <span style="--p: 100%">地表 0</span>
+          <span style="--p: 60%">空间站 36,000 km</span>
+          <span style="--p: 0%">配重 90,000 km</span>
+        </div>
+      </div>
+
+      <!-- ── Orbital labels ────────────────────────────────────── -->
+      <div class="labels" id="labels" aria-hidden="true">
+        <div class="map-label" data-label="station">
+          <i class="dot"></i>
+          <span>同步轨道空间站<em>GEOSTATIONARY STATION · 36,000 KM</em></span>
+        </div>
+        <div class="map-label" data-label="counterweight">
+          <i class="dot"></i>
+          <span>配重<em>COUNTERWEIGHT · 90,000 KM</em></span>
+        </div>
+        <div class="map-label" data-label="base">
+          <i class="dot"></i>
+          <span>赤道海上基座<em>EQUATORIAL BASE · Ø3 KM</em></span>
+        </div>
+      </div>
+
+      <!-- ── Telemetry ─────────────────────────────────────────── -->
+      <div class="hud telemetry">
+        <div class="tel-row">
+          <span class="label">高度 / ALTITUDE</span>
+          <span class="value" id="tel-alt">380 m</span>
+        </div>
+        <div class="tel-row">
+          <span class="label">尺度 / SCALE</span>
+          <span class="value" id="tel-scale">基地视图</span>
+        </div>
+        <div class="tel-row">
+          <span class="label">视角 / CAMERA</span>
+          <span class="value" id="tel-cam">全景</span>
+        </div>
+        <div class="tel-bar"><i id="tel-progress"></i></div>
+      </div>
+
+      <!-- ── Bottom controls ───────────────────────────────────── -->
+      <div class="hud controlbar">
+        <div class="segment" data-group="base">
+          <button data-preset="overview" class="active">全景</button>
+          <button data-preset="base">基座</button>
+          <button data-preset="car">轿厢</button>
+        </div>
+        <div class="segment" data-group="orbit" hidden>
+          <button data-preset="system" class="active">全貌</button>
+          <button data-preset="earth">地球</button>
+          <button data-preset="station">空间站</button>
+          <button data-preset="counterweight">配重</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <button class="btn-launch" id="btn-launch">
+          <i class="pulse"></i>
+          <span>点火升空</span>
+          <em>LAUNCH</em>
+        </button>
+        <button class="btn-ghost" data-action="orbit" id="btn-orbit">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="9.2" ry="4.2" />
+            <path d="M12 2.8v18.4M5.5 4.8l13 14.4" opacity=".55" />
+            <circle cx="12" cy="12" r="2.4" />
+          </svg>
+          <span>轨道视角</span>
+        </button>
+        <button class="btn-ghost icon-only" data-action="rotate" id="btn-rotate" aria-label="自动环绕" title="自动环绕">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 12a8 8 0 11-2.3-5.6M20 4v4h-4" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- ── Hints ─────────────────────────────────────────────── -->
+      <div class="hints" id="hints">
+        <span><b>拖动</b>旋转</span><i></i>
+        <span><b>滚轮 / 双指</b>缩放</span><i></i>
+        <span><b>右键拖动</b>平移</span>
+      </div>
+
+      <div class="toast" id="toast"></div>
+
+      <!-- ── Help dialog ───────────────────────────────────────── -->
+      <div class="modal" id="modal" hidden>
+        <div class="modal-card">
+          <button class="modal-close" data-action="close-modal" aria-label="关闭">×</button>
+          <p class="panel-kicker">ABOUT THIS RECONSTRUCTION</p>
+          <h2>关于这座太空电梯</h2>
+          <p>
+            基于电影《流浪地球2》官方公开发布的美术设定重建：赤道海上基座直径 3 公里、高 2 公里，
+            由三座主塔集群、十二座发射塔（三组每组四座）与圆形发射平台组成；216 根粗细不等的碳纳米缆绳垂直连接九部轿厢；
+            同步轨道空间站位于 36,000 公里，尾端 90,000 公里处设置配重。
+          </p>
+          <h3>操作</h3>
+          <ul>
+            <li>鼠标左键拖动 / 单指滑动：旋转视角</li>
+            <li>滚轮 / 双指捏合：缩放</li>
+            <li>鼠标右键拖动 / 双指拖动：平移</li>
+            <li>「点火升空」：跟随轿厢沿缆索爬升</li>
+            <li>「轨道视角」：切换到行星尺度，查看同步轨道站与配重</li>
+          </ul>
+          <h3>声明</h3>
+          <p class="fine">
+            本项目为非商业同人三维复现，用于技术演示。影片名称、美术设定与相关视觉元素的著作权归
+            电影《流浪地球2》出品方及原设计团队所有。参考图来源见 <code>docs/ART-REFERENCE.md</code>。
+          </p>
+          <div class="modal-credits">
+            <span>ENGINE · THREE.JS</span><span>BUILD · VITE</span><span>MODEL · PROCEDURAL</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  <!-- data-se-hub-chrome: 合集返回按钮（构建时注入） -->
+<style>
+  #se-back-home{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:2147483000;
+    display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+    min-width:32px;height:32px;padding:0 9px;border-radius:999px;text-decoration:none;
+    color:#e8f1f7;font:600 12px/1 -apple-system,"PingFang SC","Noto Sans SC",system-ui,sans-serif;letter-spacing:.04em;
+    background:rgba(8,14,20,.45);border:1px solid rgba(180,205,225,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 3px 14px rgba(0,0,0,.3);opacity:.55;overflow:hidden;white-space:nowrap;
+    transition:opacity .2s,background .2s,border-color .2s;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+  #se-back-home:hover,#se-back-home:focus-visible{opacity:1;background:rgba(22,34,46,.85);border-color:rgba(255,255,255,.55);outline:none}
+  #se-back-home svg{width:14px;height:14px;flex:none}
+  #se-back-home .se-bh-txt{max-width:0;opacity:0;margin-left:0;transition:max-width .22s ease,opacity .18s ease,margin-left .22s ease}
+  #se-back-home:hover .se-bh-txt,#se-back-home:focus-visible .se-bh-txt{max-width:120px;opacity:1;margin-left:7px}
+</style>
+<a id="se-back-home" href="../../../index.html" aria-label="返回合集首页" title="返回合集首页">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <span class="se-bh-txt">合集首页</span>
+</a></body>
+</html>

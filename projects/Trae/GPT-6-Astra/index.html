@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#071019" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="description" content="从地面到群星。参照《流浪地球 2》公开美术设定重建的太空电梯交互展台，自由旋转、放大，探索每一处工业细节。" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' ws://127.0.0.1:* ws://localhost:*; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; media-src 'none'" />
+    <title>天梯 · SPACE ELEVATOR</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <script type="module" crossorigin src="./assets/index-2QT9_vZB.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/three-DlhXEXcl.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-CDFnr0vz.css">
+  </head>
+  <body>
+    <div id="app">
+      <main id="viewport" aria-label="太空电梯三维模型，拖动旋转，滚轮或双指缩放" tabindex="0"></main>
+      <div class="vignette" aria-hidden="true"></div>
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="天梯计划首页"><svg viewBox="0 0 34 38" aria-hidden="true"><path d="M17 2 2 31h30L17 2Zm0 11L9 28m8-15 8 15M17 6v30M5 23h24"/></svg><span>天梯计划<small>PROJECT ASCENT</small></span></a>
+        <div class="edition"><span class="status-dot"></span> 交互模型展览 <span class="divider">/</span> REV. 004</div>
+        <button class="icon-button" id="help" aria-label="查看操作说明" title="操作说明"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.3 9a2.8 2.8 0 0 1 5.4 1c0 2-2.7 2-2.7 4m0 3h.01"/></svg></button>
+      </header>
+      <div class="scene-tools" role="group" aria-label="模型展示">
+        <button id="enter-cabin" class="scene-tool" aria-pressed="false">进入舱内</button>
+        <button id="shield" class="scene-tool" aria-pressed="false" hidden>展开冰盾</button>
+        <button id="lighting" class="scene-tool" aria-pressed="true">光照 · 电影</button>
+      </div>
+      <nav id="cabin-views" aria-label="舱内观察位置" hidden>
+        <span>CABIN / 舱内探索</span>
+        <button class="scene-tool" data-cabin="aisle" aria-pressed="true">客舱过道</button>
+        <button class="scene-tool" data-cabin="seat" aria-pressed="false">乘员座位</button>
+        <button class="scene-tool" data-cabin="control" aria-pressed="false">操控舱</button>
+        <button class="scene-tool" data-cabin="cutaway" aria-pressed="false">结构剖面</button>
+      </nav>
+      <section class="intro" aria-label="展览介绍">
+        <div class="eyebrow"><span></span> THE WANDERING EARTH II · RECONSTRUCTED</div>
+        <h1>SPACE<br/><span>ELEVATOR</span><i>太空电梯</i></h1>
+        <p class="lead">从地面，到群星。<br/>一段关于人类与宇宙的垂直航行。</p>
+        <div class="intro-rule"></div>
+        <p class="intro-note">旋转视角，探索结构。<br/>让想象力，越过大气层。</p>
+        <button class="explore-button" id="explore">探索轿厢 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+      </section>
+      <div id="annotations" aria-label="模型部件">
+        <button class="annotation" data-anchor="station"><span class="anchor-dot"></span><span><small>03 / ORBITAL TERMINAL</small>轨道平台<svg viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></span></button>
+        <button class="annotation" data-anchor="climber"><span class="anchor-dot"></span><span><small>02 / ASCENT VEHICLE</small>运载轿厢<svg viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></span></button>
+        <button class="annotation" data-anchor="base"><span class="anchor-dot"></span><span><small>01 / GROUND COMPLEX</small>地面基地<svg viewBox="0 0 16 16"><path d="M4 12 12 4M4 4h8v8"/></svg></span></button>
+      </div>
+      <aside class="altitude" aria-label="电梯航程"><span class="rail-caption">ORBIT</span><div class="rail"><div class="rail-fill" id="rail-fill"></div><span class="rail-car" id="rail-car"></span><i></i><i></i><i></i><i></i><i></i></div><span class="rail-caption">EARTH</span><span class="rail-value" id="rail-value">42%</span></aside>
+      <section class="detail-card" aria-live="polite">
+        <div class="detail-top"><span id="detail-index">00 / OVERVIEW</span><span class="tag">设定复建</span></div>
+        <h2 id="detail-title">连接天地的超级工程</h2>
+        <p id="detail-description">地面基座、运载轿厢与轨道平台，由纵贯天际的缆索连接。选择一个部件，靠近看看。</p>
+        <div class="detail-bottom"><span id="detail-meta">全景视角</span><span>展示比例 · 非等比</span></div>
+      </section>
+      <div class="scene-caption"><span class="crosshair">+</span><span>EARTH ↗ ORBIT<small>一场向上的远行</small></span></div>
+      <div class="bottom-ui">
+        <div class="journey">
+          <button id="play" class="icon-button" aria-label="暂停轿厢运行" aria-pressed="true"><svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg></button>
+          <span class="journey-label">轿厢航程</span><input id="progress" type="range" min="0" max="100" step="0.1" value="42" aria-label="调整轿厢航程"/><output id="progress-value" for="progress">42%</output>
+          <button id="follow" class="text-button" aria-pressed="false">跟随轿厢 <span>↗</span></button>
+        </div>
+        <nav class="toolbar" aria-label="场景控制">
+          <div class="views" role="group" aria-label="选择观察部件">
+            <button class="view-button active" data-view="overview" aria-pressed="true"><span class="view-number">00</span>总览</button>
+            <button class="view-button" data-view="base" aria-pressed="false"><span class="view-number">01</span>地面基地</button>
+            <button class="view-button" data-view="climber" aria-pressed="false"><span class="view-number">02</span>运载轿厢</button>
+            <button class="view-button" data-view="station" aria-pressed="false"><span class="view-number">03</span>轨道平台</button>
+          </div>
+          <div class="toolbar-actions">
+            <button id="rotate" class="icon-button" aria-label="开启自动环绕" aria-pressed="false" title="自动环绕"><svg viewBox="0 0 24 24"><path d="M19 8a8 8 0 1 0 1 7M19 3v5h-5"/><path d="m9 9 6 3-6 3Z"/></svg></button>
+            <button id="reset" class="icon-button" aria-label="重置视角" title="重置视角"><svg viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1 7M5 3v5h5"/></svg></button>
+            <button id="quality" class="quality-button" aria-label="切换画质">高清 <span>◈</span></button>
+            <button id="capture" class="icon-button" aria-label="保存模型截图" title="保存模型截图"><svg viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v13H3Z"/><circle cx="12" cy="13" r="4"/></svg></button>
+            <button id="fullscreen" class="icon-button" aria-label="进入全屏" title="全屏"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+          </div>
+        </nav>
+        <footer><span class="interaction-hint"><svg viewBox="0 0 20 20"><rect x="5" y="2" width="10" height="16" rx="5"/><path d="M10 2v6"/></svg><span id="gesture-hint">拖动旋转 · 滚轮缩放 · 右键平移</span></span><span class="credit">致敬《流浪地球 2》<span> / </span>美术设定复建</span></footer>
+      </div>
+      <div id="loader" role="status"><div class="loader-emblem">↑</div><span class="eyebrow">PROJECT ASCENT</span><h2>正在连接天地</h2><div class="loading-track"><span id="loading-progress"></span></div><p id="loading-text">构建太空电梯 · 准备启程</p></div>
+      <div id="error" hidden role="alert"><span class="eyebrow">PROJECT ASCENT</span><h2>暂时无法开启 3D 视图</h2><p id="error-text">请使用支持 WebGL 2 的浏览器，并开启硬件加速。</p><button id="reload" class="explore-button">重新加载 ↗</button></div>
+      <div id="toast" role="status"></div>
+      <dialog id="help-dialog"><button id="close-help" class="icon-button close" aria-label="关闭操作说明">×</button><span class="eyebrow">EXPLORER'S GUIDE</span><h2>换个角度，看见宇宙。</h2><div class="help-grid"><div><h3>鼠标操作</h3><p>左键拖动 · 旋转视角<br/>滚轮 · 放大 / 缩小<br/>右键拖动 · 平移</p></div><div><h3>触屏操作</h3><p>单指拖动 · 旋转视角<br/>双指捏合 · 放大 / 缩小<br/>双指拖动 · 平移</p></div></div><p>底部按钮切换观察部件，滑块调整航程。右上角可进入舱内、切换光照或展开冰盾。舱内拖动环顾，通过“客舱过道 / 乘员座位 / 操控舱”切换位置；“结构剖面”可自由旋转缩放，观察内部布局。舱内相机始终随轿厢运行。</p><p class="help-note">键盘：1–4 切换外部视角，5 进入舱内，空格暂停 / 继续，R 重置。<br/>参照公开美术设定重建，展示高度、座位数量、内舱尺寸及隐藏细节经过适配，未获得电影原始模型。参考：北京日报公开图版（2023-02-04）及机核 / CG世界美术设定文章（2023-02-06）。</p><button id="start-exploring" class="explore-button">开始探索 <span>↗</span></button></dialog>
+    </div>
+  <!-- data-se-hub-chrome: 合集返回按钮（构建时注入） -->
+<style>
+  #se-back-home{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:2147483000;
+    display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+    min-width:32px;height:32px;padding:0 9px;border-radius:999px;text-decoration:none;
+    color:#e8f1f7;font:600 12px/1 -apple-system,"PingFang SC","Noto Sans SC",system-ui,sans-serif;letter-spacing:.04em;
+    background:rgba(8,14,20,.45);border:1px solid rgba(180,205,225,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 3px 14px rgba(0,0,0,.3);opacity:.55;overflow:hidden;white-space:nowrap;
+    transition:opacity .2s,background .2s,border-color .2s;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+  #se-back-home:hover,#se-back-home:focus-visible{opacity:1;background:rgba(22,34,46,.85);border-color:rgba(255,255,255,.55);outline:none}
+  #se-back-home svg{width:14px;height:14px;flex:none}
+  #se-back-home .se-bh-txt{max-width:0;opacity:0;margin-left:0;transition:max-width .22s ease,opacity .18s ease,margin-left .22s ease}
+  #se-back-home:hover .se-bh-txt,#se-back-home:focus-visible .se-bh-txt{max-width:120px;opacity:1;margin-left:7px}
+</style>
+<a id="se-back-home" href="../../../index.html" aria-label="返回合集首页" title="返回合集首页">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <span class="se-bh-txt">合集首页</span>
+</a></body>
+</html>
