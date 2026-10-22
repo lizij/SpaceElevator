@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+playwright-report/
+test-results/
+.runtime/
+.DS_Store
+# 说明：references/private/ 是采集自公开网页的美术集图版，作为非商业同人研究档案
+# 随合集仓库公开（它们不进入网页构建产物；Vite 只打包 public/ 与被 import 的资源）。

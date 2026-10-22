@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>太空电梯 · 结构 blockout</title>
+    <style>
+      :root { color-scheme: dark; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #11171c; color: #e7edf2; font-family: "PingFang SC", "Noto Sans SC", system-ui, sans-serif; }
+      #app { position: fixed; inset: 0; }
+      #ui { position: fixed; left: 24px; top: 20px; z-index: 2; pointer-events: none; }
+      #ui h1 { margin: 0; font-size: 18px; letter-spacing: .18em; font-weight: 500; }
+      #ui p { margin: 6px 0 0; color: #94a4af; font-size: 11px; letter-spacing: .08em; }
+      #tabs { position: fixed; left: 24px; bottom: 24px; z-index: 2; display: flex; gap: 8px; }
+      #tabs button { pointer-events: auto; border: 1px solid rgba(200,215,225,.22); background: rgba(9,15,20,.72); color: #9fb1bd; padding: 9px 14px; font-size: 12px; letter-spacing: .08em; cursor: pointer; }
+      #tabs button.is-active { color: #fff; border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.12); }
+      #hint { position: fixed; right: 24px; bottom: 28px; z-index: 2; color: #667983; font-size: 10px; letter-spacing: .06em; }
+      #label { position: fixed; right: 24px; top: 22px; z-index: 2; color: #7d929e; font-size: 10px; letter-spacing: .16em; text-align: right; }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="ui">
+      <h1>太空电梯 · 结构 blockout</h1>
+      <p>不贴图、不加 AO，只验证剪影 / 比例 / 体块关系</p>
+    </div>
+    <div id="label">BLOCKOUT / SILHOUETTE PASS</div>
+    <div id="tabs">
+      <button data-view="base" class="is-active">01 基座</button>
+      <button data-view="cabin">02 轿厢</button>
+    </div>
+    <div id="hint">拖动旋转 · 滚轮缩放 · 右键平移</div>
+    <script type="module" src="/src/blockout/main.ts"></script>
+  </body>
+</html>

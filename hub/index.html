@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>太空电梯实验合集 · Space Elevator Agent Lab</title>
+  <meta name="description" content="同一句话 Prompt × 不同 Agent + Model：流浪地球2太空电梯 Web 3D 实验合集" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 8h24M7 15h18M10 22h12' stroke='%237fd4ff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./hub.css" />
+</head>
+<body>
+  <div class="bg-stars" aria-hidden="true"></div>
+  <div class="bg-arc" aria-hidden="true"></div>
+
+  <header class="hero">
+    <p class="eyebrow">THE WANDERING EARTH II · SPACE ELEVATOR · AGENT LAB</p>
+    <h1>同一句话 Prompt，<br />不同 <span class="hl">Agent × Model</span> 的太空电梯</h1>
+    <p class="sub">每个实验都由同一句提示词驱动 Agent 自主完成：研究美术集、编写代码、迭代还原、本地部署。点击卡片进入对应的 3D 作品，对比不同工具链与模型的一次性交付能力。</p>
+    <figure class="prompt-card">
+      <figcaption>原始 Prompt</figcaption>
+      <blockquote id="prompt-text"></blockquote>
+    </figure>
+    <div class="hero-meta">
+      <span><b id="project-count">5</b> 个实验</span>
+      <span>纯前端 · Three.js / React Three Fiber</span>
+      <span>同人非官方作品</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid" id="cards"><!-- hub.js 渲染 --></section>
+  </main>
+
+  <footer class="site-footer">
+    <p>本合集所有作品均为《流浪地球2》太空电梯的非商业同人重建，与电影出品方无隶属或授权关系；片名、美术设定及相关权利归各自权利人所有。</p>
+    <p>模型全部由代码程序化生成，美术集图版采集自公开网页，仅作学习研究与 Agent 能力横评。</p>
+  </footer>
+
+  <script type="application/json" id="se-data">__DATA__</script>
+  <script src="./hub.js"></script>
+</body>
+</html>

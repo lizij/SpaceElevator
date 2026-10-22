@@ -1,0 +1,20 @@
+{
+  "name": "space-elevator-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "同一 Prompt × 不同 Agent+Model：流浪地球2太空电梯 Web 3D 实验合集",
+  "scripts": {
+    "install:all": "node scripts/build-all.mjs install",
+    "build": "node scripts/build-all.mjs build",
+    "thumbs": "node scripts/capture-thumbs.mjs",
+    "serve": "node scripts/serve.mjs",
+    "audit": "node scripts/audit-sensitive.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

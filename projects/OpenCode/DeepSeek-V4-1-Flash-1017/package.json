@@ -1,0 +1,25 @@
+{
+  "name": "space-elevator-3d",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "《流浪地球2》太空电梯 三维复现 / Space Elevator fan reconstruction",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node scripts/test-interactions.mjs",
+    "shots": "node scripts/capture.mjs",
+    "test:mobile": "node scripts/test-mobile.mjs"
+  },
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "playwright": "^1.64.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}

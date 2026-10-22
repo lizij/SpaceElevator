@@ -1,0 +1,299 @@
+{
+  "source": "https://m.163.com/dy/article/HSTDCB0P0516BJGJ.html",
+  "upstream": "https://www.gcores.com/articles/161691",
+  "publisher": "CG世界 / 机核",
+  "published": "2023-02-06",
+  "downloaded": "2026-10-20",
+  "plates": [
+    {
+      "file": "design-06.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/a75e5c94j00rpncwh0027d200u000krg00it00d0.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        747
+      ],
+      "sha256": "c101d570fd755d770a559b364c563a63758576f3dcfa28dc25b0c184fd27cf78"
+    },
+    {
+      "file": "design-07.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/d8bbe483j00rpncwh005yd200u001ahg00it00t4.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        1673
+      ],
+      "sha256": "df0cd5caec0023b1591a18bbafadc14b43a0b89d34b85a0799c7ce7872028041"
+    },
+    {
+      "file": "design-08.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/93dde331j00rpncwi008dd200u001glg00it00wy.jpg",
+      "caption": "太空电梯基座塔体结构细化设计 深化设计_王志坚",
+      "size": [
+        1080,
+        1893
+      ],
+      "sha256": "577e03828f88a7c82375de476f1473c4109d163ab2aae96450d4ae1b9098b171"
+    },
+    {
+      "file": "design-09.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/1c1c46c4j00rpncwi000dd200hs00aog00it00ba.jpg",
+      "caption": "",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "628d2ff69c1748e2fd3afb99338ce557699ad34f11d2880577be66f6aeaa6a6e"
+    },
+    {
+      "file": "design-10.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/7942a2a1j00rpncwj000ld200hs00aog00it00ba.jpg",
+      "caption": "",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "8995e795fd591b569c3e58a5a5fdbdbb7c7f9a4d58241118df2d4a14a8eaf15b"
+    },
+    {
+      "file": "design-11.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/1afcec32j00rpncwj0010d200hs00aog00it00ba.jpg",
+      "caption": "",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "f3cdbbd4465c2823938ca61c87c09a9b984c540e6086725abcc235111d252de9"
+    },
+    {
+      "file": "design-12.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/59c391c9j00rpncwk000id200hs00aog00it00ba.jpg",
+      "caption": "",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "e8ea858bf188eed49ce49744107c734da4b3a899447911347cd1f97f1c1861f5"
+    },
+    {
+      "file": "design-13.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/2a0bde9ej00rpncwk000td200hs00aog00it00ba.jpg",
+      "caption": "太空电梯基座 深化设计_0800",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "071a01869212a4e91b80992e59a7cfc8dc22d87bb612ccb1680ed3046959fb8b"
+    },
+    {
+      "file": "design-14.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/f86ac746j00rpncwl000md200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "419d7122c8b2306a11470619c85b2c7d82ce6435814db6b6f38202bcf3565e1e"
+    },
+    {
+      "file": "design-15.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/ba8a5cbbj00rpncwl000hd200hs0083g00it008j.jpg",
+      "caption": "",
+      "size": [
+        640,
+        291
+      ],
+      "sha256": "6cf70b5881942b12443add0bd213b0c48f9f10f96c11e2a95b9ed8db736c0c96"
+    },
+    {
+      "file": "design-16.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/37e678a2j00rpncwm000fd200hs0074g00it007i.jpg",
+      "caption": "",
+      "size": [
+        640,
+        256
+      ],
+      "sha256": "91f18dba30cfe1251060b86eb4f0463cc961dbfa12ffd064c03bd50f9d16dc53"
+    },
+    {
+      "file": "design-17.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/d4630edej00rpncwm000md200hs008jg00it0090.jpg",
+      "caption": "",
+      "size": [
+        640,
+        307
+      ],
+      "sha256": "97eef4449de40bafa6e096e048be5c919a2277a10cc5f67ac758cc893837c234"
+    },
+    {
+      "file": "design-18.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/a04c2951j00rpncwm0013d200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "fefae3971fdc4c9a946b575fb16e5be4eddc0824e6192cd1096c2cfd7b2f094c"
+    },
+    {
+      "file": "design-19.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/f7f2aab8j00rpncwm0012d200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "d3a720fafbba47fdc09d6cb373cb5aab404c7b76e985175b165b0222b2fdccbf"
+    },
+    {
+      "file": "design-20.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/ac060b08j00rpncwp000ud200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "4edaf7662bc57836a2a1fc41d477fa3956969b106fe7fc265b5ccfc41c7b15ab"
+    },
+    {
+      "file": "design-21.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/e7eae8bdj00rpncwp001kd200u000gvg00it00ak.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        607
+      ],
+      "sha256": "aa5fd41d8862fe56d341b31acf8721cb0b590cc2e88804ad3974c3a1b5f60b2a"
+    },
+    {
+      "file": "design-22.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/b1974cbdj00rpncwq001zd200u000gvg00it00ak.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        607
+      ],
+      "sha256": "628d50fddf0418c2254feae92ad31b2dd2cdffe131d59af7bfdabc67371078e5"
+    },
+    {
+      "file": "design-23.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/fa6a6031j00rpncwq000vd200hs00aog00it00ba.jpg",
+      "caption": "",
+      "size": [
+        640,
+        384
+      ],
+      "sha256": "d40bfd85307fec6395f468953f26da3e0e18b2a75fbbed1bf34af5c3d1058b87"
+    },
+    {
+      "file": "design-31.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/ec4f0b56j00rpncwt0020d200u000h5g00it00aq.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        617
+      ],
+      "sha256": "3e70b1bb0855789072fc6e4de071c146164765c432b1bcddac8394cc9833a23c"
+    },
+    {
+      "file": "design-32.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/3985b02cj00rpncwt0020d200u000h5g00it00aq.jpg",
+      "caption": "太空电梯轿厢外观最终设计 设计_王志坚",
+      "size": [
+        1080,
+        617
+      ],
+      "sha256": "565e5f728faaea649c2e8e53a62a691c403abff79491eea46be6d17f274e2b92"
+    },
+    {
+      "file": "design-33.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/5953529ej00rpncwu000md200hs00a6g00it00ar.jpg",
+      "caption": "",
+      "size": [
+        640,
+        366
+      ],
+      "sha256": "987ccc697a7a8d9987438ae27a0b1657eff5376c619d236bf2993b51db21dbc4"
+    },
+    {
+      "file": "design-34.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/17ea3678j00rpncwv001wd200hs00jxg00it00l2.jpg",
+      "caption": "",
+      "size": [
+        640,
+        717
+      ],
+      "sha256": "c1eacfb946579aee0d80b7ffe12f914af6624cf693fc37bbd9b7dec840473675"
+    },
+    {
+      "file": "design-35.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/e8b0c58aj00rpncwv000pd200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "dc0d6e8632bf95c650cb296d7a556a1527e0f8c5da18b697d3cf882fa7aedf40"
+    },
+    {
+      "file": "design-36.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/6bc97359j00rpncww000od200hs00a0g00it00ak.jpg",
+      "caption": "",
+      "size": [
+        640,
+        360
+      ],
+      "sha256": "686e3ed6b135cade741e78e9882a2af64dbd8918f71d447970ba2b13d6773287"
+    },
+    {
+      "file": "design-37.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/eaa67171j00rpncww0012d200u000c0g00it007i.jpg",
+      "caption": "",
+      "size": [
+        1080,
+        432
+      ],
+      "sha256": "c0cc994066353a5997c010b09044e04681a051615033d464873647592623a054"
+    },
+    {
+      "file": "design-38.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/ef1e3dc4j00rpncww001pd200u000gvg00it00ak.jpg",
+      "caption": "轿厢冰盾最终设计 设计_0800",
+      "size": [
+        1080,
+        607
+      ],
+      "sha256": "b9bf75eaa58f8f7a6db9c8f85e254a9d28ed8a396584766289ca61856c531ede"
+    },
+    {
+      "file": "design-39.gif",
+      "url": "https://dingyue.ws.126.net/2023/0206/29791767g00rpncwy02a7d200k000b9g00it00ak.gif",
+      "caption": "",
+      "size": [
+        720,
+        405
+      ],
+      "sha256": "6603d68f23ec1bf1509c81217106bd341f75eeab18f360d03774ebae17be1ab8"
+    },
+    {
+      "file": "design-43.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/69aeca37j00rpncx1001ed200hs00sgg00it00u3.jpg",
+      "caption": "",
+      "size": [
+        640,
+        1024
+      ],
+      "sha256": "5f87a95fc3d2eb929f9853d76984b4413352109e233dfb7aaa4cdf3f34d43397"
+    },
+    {
+      "file": "design-44.jpg",
+      "url": "https://dingyue.ws.126.net/2023/0206/5b50c9ddj00rpncx1000rd200hs00btg00hs00bt.jpg",
+      "caption": "",
+      "size": [
+        640,
+        425
+      ],
+      "sha256": "d1f9eaacdcb6119a63e4a0b0f048e5b16b474dc0977e975d5825564eff0e2591"
+    }
+  ]
+}

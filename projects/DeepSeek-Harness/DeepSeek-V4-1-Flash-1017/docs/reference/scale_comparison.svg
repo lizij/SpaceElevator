@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <radialGradient id="earth" cx="38%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#4e9bd6"/>
+      <stop offset="55%" stop-color="#1e5f9e"/>
+      <stop offset="100%" stop-color="#071b33"/>
+    </radialGradient>
+    <filter id="glow" x="-300%" y="-300%" width="700%" height="700%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1200" fill="#060910"/>
+
+  <!-- 1 px ≈ 106.2 km, Earth radius 6,371 km = 60 px -->
+  <circle cx="450" cy="1080" r="60" fill="url(#earth)" stroke="#7ec8ff" stroke-opacity="0.55" stroke-width="1"/>
+  <circle cx="450" cy="1080" r="66" fill="none" stroke="#4b9fe0" stroke-opacity="0.22" stroke-width="8"/>
+
+  <!-- tether: 90,000 km = 847 px -->
+  <line x1="450" y1="1020" x2="450" y2="173" stroke="#d7e6ff" stroke-width="2" filter="url(#glow)"/>
+  <line x1="450" y1="1020" x2="450" y2="173" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.8"/>
+
+  <!-- station: 36,000 km above surface -->
+  <g filter="url(#glow)">
+    <circle cx="450" cy="681" r="6" fill="#ffb347"/>
+    <line x1="450" y1="681" x2="520" y2="681" stroke="#ffb347" stroke-width="1"/>
+  </g>
+  <text x="530" y="676" fill="#ffcf8a" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">空间站 / GEO</text>
+  <text x="530" y="698" fill="#8ea2b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">36,000 km</text>
+
+  <!-- counterweight: 90,000 km above surface -->
+  <g filter="url(#glow)">
+    <rect x="438" y="161" width="24" height="24" fill="none" stroke="#9fd4ff" stroke-width="2"/>
+    <line x1="450" y1="161" x2="520" y2="161" stroke="#9fd4ff" stroke-width="1"/>
+  </g>
+  <text x="530" y="156" fill="#cfe7ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">配重 / 末端</text>
+  <text x="530" y="178" fill="#8ea2b8" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">90,000 km</text>
+
+  <!-- base callout -->
+  <circle cx="450" cy="1020" r="3" fill="#ff5d5d" filter="url(#glow)"/>
+  <line x1="450" y1="1020" x2="250" y2="1120" stroke="#ff7a7a" stroke-width="1"/>
+  <text x="60" y="1148" fill="#ff9b9b" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">基座：直径 3 km / 高 2 km</text>
+  <text x="60" y="1170" fill="#9b7c7c" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">在此比例下不足 0.03 px，必须单独分层放大</text>
+
+  <!-- scale bar -->
+  <line x1="70" y1="1070" x2="170" y2="1070" stroke="#7f8ea3" stroke-width="1"/>
+  <line x1="70" y1="1065" x2="70" y2="1075" stroke="#7f8ea3" stroke-width="1"/>
+  <line x1="170" y1="1065" x2="170" y2="1075" stroke="#7f8ea3" stroke-width="1"/>
+  <text x="70" y="1097" fill="#7f8ea3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12">100 px ≈ 10,620 km</text>
+
+  <text x="60" y="60" fill="#e8f1ff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" letter-spacing="4">SPACE ELEVATOR — TRUE SCALE</text>
+  <text x="60" y="88" fill="#6f8299" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">Earth radius 6,371 km = 60 px · tether 90,000 km = 847 px · base 3 km &lt; 0.03 px</text>
+
+  <text x="60" y="960" fill="#6f8299" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">0 km / 海平面</text>
+</svg>

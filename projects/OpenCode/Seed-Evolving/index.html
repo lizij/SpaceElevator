@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath d=%27M16 2v28M4 8h24M7 15h18M10 22h12%27 stroke=%27%237fd4ff%27 stroke-width=%272%27 stroke-linecap=%27round%27/%3E%3C/svg%3E" />
+    <title>流浪地球2 · 太空电梯 3D 查看器</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- 热点标注层 -->
+    <div id="hotspots" aria-hidden="false"></div>
+
+    <!-- 顶部标题 -->
+    <header class="hud header">
+      <h1>太空电梯 <span>SPACE ELEVATOR</span></h1>
+      <p>《流浪地球2》美术设定风格 · 程序化生成（仅供学习）</p>
+    </header>
+
+    <!-- 右上角控制按钮 -->
+    <div class="hud toolbar">
+      <button id="btn-follow" type="button" title="镜头跟随轿厢上升（再按退出）">🎥 跟随轿厢</button>
+      <button id="btn-launch" type="button" title="触发射发射演出">🚀 发射</button>
+      <button id="btn-pause" type="button" aria-pressed="false" title="暂停/播放所有动画（快捷键 P）">⏸ 暂停</button>
+      <button id="btn-reset" type="button">复位视角</button>
+      <button id="btn-auto" type="button">自动巡游</button>
+    </div>
+
+    <!-- 热点说明卡片 -->
+    <section id="detail" class="hud detail hidden">
+      <button id="detail-close" type="button" aria-label="关闭">×</button>
+      <h2 id="detail-title"></h2>
+      <p id="detail-text"></p>
+    </section>
+
+    <!-- 底部操作提示 -->
+    <footer class="hud hint">
+      <span>🖱️ 拖拽旋转</span><i>·</i><span>滚轮 / 双指缩放</span><i>·</i><span>点击标注聚焦</span><i>·</i><span>按 P 暂停</span>
+    </footer>
+
+    <!-- 暗角 + 电影调色叠加 -->
+    <div class="vignette"></div>
+    <div class="grade"></div>
+
+    <!-- 发射瞬间全屏闪光 -->
+    <div id="launch-flash" class="flash"></div>
+
+    <!-- 首帧加载提示 -->
+    <div id="loader">正在构建太空电梯…</div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

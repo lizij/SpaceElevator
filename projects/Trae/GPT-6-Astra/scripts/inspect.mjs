@@ -1,0 +1,16 @@
+import { chromium } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { loopbackTestUrl } from './test-url.mjs';
+const out=fileURLToPath(new URL('../.runtime/verification/',import.meta.url));
+await mkdir(out,{recursive:true});
+const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const page=await browser.newPage({viewport:{width:1440,height:960},deviceScaleFactor:1});
+const messages=[];page.on('pageerror',e=>messages.push({type:'pageerror',message:e.message}));page.on('console',m=>{if(['error','warning'].includes(m.type()))messages.push({type:m.type(),message:m.text()});});
+await page.goto(loopbackTestUrl(),{waitUntil:'networkidle'});
+await page.waitForFunction(()=>window.__ASCENT__?.getState().ready,{timeout:30000});
+await page.locator('#play').click();await page.waitForTimeout(800);
+await page.screenshot({path:out+'desktop-overview.png'});
+console.log(JSON.stringify({state:await page.evaluate(()=>window.__ASCENT__.getState()),messages},null,2));
+await writeFile(out+'first-render.json',JSON.stringify({state:await page.evaluate(()=>window.__ASCENT__.getState()),messages},null,2));
+await browser.close();

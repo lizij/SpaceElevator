@@ -1,0 +1,100 @@
+{
+  "source": "https://wap.bjd.com.cn/news/2023/02/04/10324487.shtml",
+  "title": "《流浪地球2》的太空电梯如何搭建？美术设定集曝光",
+  "publisher": "北京日报 / @环球时报",
+  "published": "2023-02-04",
+  "downloaded": "2026-10-20",
+  "usage": "Local reference only; no redistribution license found. Excluded from build and version control.",
+  "plates": [
+    {
+      "file": "plate-01.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/d209dcaeed89c0939577108100111fe8b40c11d0.png",
+      "size": [
+        552,
+        1867
+      ],
+      "bytes": 1355880,
+      "sha256": "ee8087673c7d795463d0e49b0d6860d79a42de7b419dd47b5988bc6b0c18dc44"
+    },
+    {
+      "file": "plate-02.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/ea858e133e4bd237f8cca34e13e7c7dcf92ba28b.png",
+      "size": [
+        552,
+        2570
+      ],
+      "bytes": 1842326,
+      "sha256": "b39a14c4fb8e7ac32572dcffa046ba2ac9b9c4b00cf2e827e06bc6a140b8bf8b"
+    },
+    {
+      "file": "plate-03.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/690028689df4a702b48952ea50a442493fc16057.png",
+      "size": [
+        552,
+        2934
+      ],
+      "bytes": 2277055,
+      "sha256": "01cc04467c92f1b83e58c861367b222340576769dab9899a0b2e6c620b433a91"
+    },
+    {
+      "file": "plate-04.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/fca31af706a8e715c8a3390668e4cda3d3a5134e.png",
+      "size": [
+        552,
+        2640
+      ],
+      "bytes": 1609680,
+      "sha256": "668c5c08bc6269ca28b8e6ca0311d1158933d45db7c5fe06e809918ce949cb7b"
+    },
+    {
+      "file": "plate-05.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/ffff9dc6152e779e0ba0299c2e85a6865cbd7ed7.png",
+      "size": [
+        552,
+        2820
+      ],
+      "bytes": 1819876,
+      "sha256": "b3252f8b99587120a43d6758beccd631f95913bd1cadc67ea68021c60a3f906b"
+    },
+    {
+      "file": "plate-06.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/5188ebe12079bc60132fb2781ba1b6708beb2184.png",
+      "size": [
+        552,
+        2844
+      ],
+      "bytes": 2198260,
+      "sha256": "2208137bcf7f9701e8ddba01256ed437652cac31851064fc4e94dc57d1d81aa7"
+    },
+    {
+      "file": "plate-07.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/30082583a6d9f80a7bc63de6e19a17f1871d8688.png",
+      "size": [
+        552,
+        2366
+      ],
+      "bytes": 1908508,
+      "sha256": "d19f5a7271675923959d66f4cbd3ac09e50da015810f24abf67da9439f76714e"
+    },
+    {
+      "file": "plate-08.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/6c484f3e2a110c7c120175cd3a0cac2ee93034e1.png",
+      "size": [
+        552,
+        2992
+      ],
+      "bytes": 1885148,
+      "sha256": "ad9b1b291d894008cb216807814559aa339dd1325b25fc36f1cf36dc0b73929a"
+    },
+    {
+      "file": "plate-09.png",
+      "url": "https://img1.bjd.com.cn/2023/02/04/a1c9eab60747514a29d41f9d95cb98e59c33e83f.png",
+      "size": [
+        552,
+        1076
+      ],
+      "bytes": 498850,
+      "sha256": "c0698ad4175f6c40c544d665f94465e66e54a2afd07f306764dde38b6a2e7a4a"
+    }
+  ]
+}
