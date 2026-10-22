@@ -34,6 +34,13 @@ export const PROJECTS = [
     thumbShot: '基座全景默认机位',
     thumbQuery: '?intro=0&view=base',
     extraEntries: ['blockout.html'],
+    readmeShots: [
+      { file: 'overview', url: '?intro=0&view=orbit', wait: 9000 },
+      { file: 'base', url: '?intro=0&view=base', wait: 9000 },
+      { file: 'cabin', url: '?intro=0&view=cabin', wait: 9000 },
+      { file: 'station', url: '?intro=0&view=station', wait: 9000 },
+      { file: 'interior', url: '?intro=0&view=interior', wait: 9000 },
+    ],
   },
   {
     id: 'opencode-ark-ds41',
@@ -46,6 +53,13 @@ export const PROJECTS = [
     stack: 'TypeScript · Three.js 0.186 · Vite 8（无框架）',
     highlights: ['基地 / 轨道双尺度场景', '点火升空追车镜头与晨昏/深夜切换', '程序化环境音、移动端竖屏标尺构图'],
     thumbShot: '基地全景默认机位',
+    readmeShots: [
+      { file: 'overview', wait: 9000 },
+      { file: 'base', click: '[data-preset="base"]', wait: 6000 },
+      { file: 'car', click: '[data-preset="car"]', wait: 6000 },
+      { file: 'orbit', actions: [['click', '[data-action="orbit"]', 3500], ['click', '[data-preset="station"]', 6000]] },
+      { file: 'night', actions: [['click', '[data-action="theme"]', 1500], ['click', '[data-preset="base"]', 6000]] },
+    ],
   },
   {
     id: 'gpt',
@@ -58,6 +72,12 @@ export const PROJECTS = [
     stack: 'TypeScript · Three.js 0.180 · Vite 7（无框架）',
     highlights: ['42 座乘员舱与四个舱内观察位', 'SSAO/SMAA 自研画质管线与黑块回归验证', '按官方图版逐项像素标定的轿厢/方舟/配重'],
     thumbShot: '总览机位 / 42% 航程轿厢',
+    readmeShots: [
+      { file: 'overview', wait: 9000 },
+      { file: 'base', click: '[data-view="base"]', wait: 7000 },
+      { file: 'climber', click: '[data-view="climber"]', wait: 7000 },
+      { file: 'station', click: '[data-view="station"]', wait: 7000 },
+    ],
   },
   {
     id: 'evolving',
@@ -70,6 +90,12 @@ export const PROJECTS = [
     stack: 'TypeScript · Three.js 0.170 · Vite 5（无框架）',
     highlights: ['黄昏 god rays 体积光束与电影调色', '门式发射塔与三轿厢同时运行', '发射冲击波/蒸汽全屏演出、全局暂停'],
     thumbShot: '黄昏基地默认机位',
+    readmeShots: [
+      { file: 'overview', wait: 9000 },
+      { file: 'base', clickText: '.hotspot', 'text': '海上基地', wait: 7000 },
+      { file: 'station', clickText: '.hotspot', 'text': '方舟空间站', wait: 8000 },
+      { file: 'follow', click: '#btn-follow', wait: 9000 },
+    ],
   },
   {
     id: 'op55',
@@ -82,6 +108,13 @@ export const PROJECTS = [
     stack: 'React · Three.js（预构建包，零安装零构建）',
     highlights: ['8 个预设视角 · 地月尺度全景', '轿厢倍速 / 画质切换 / 结构标注', '15 张 PBR 程序化贴图'],
     thumbShot: '基座全景默认机位',
+    readmeShots: [
+      { file: 'overview', wait: 9000 },
+      { file: 'base', clickText: 'button', text: '主塔近景', wait: 7000 },
+      { file: 'cabin', clickText: 'button', text: '跟随轿厢', wait: 8000 },
+      { file: 'station', clickText: 'button', text: '同步轨道空间站', wait: 8000 },
+      { file: 'earth-moon', clickText: 'button', text: '地月尺度全景', wait: 9000 },
+    ],
   },
 ];
 

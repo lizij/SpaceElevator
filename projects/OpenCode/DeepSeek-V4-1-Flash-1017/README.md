@@ -6,6 +6,18 @@
 > 本项目是「同一 Prompt × 不同 Agent+Model」实验合集的成员之一。
 > 实验环境：**OpenCode + DeepSeek V4.1 Flash 1017**。合集首页位于仓库根目录，构建后从首页进入本项目体验。
 
+## 效果预览
+
+晨昏与深夜双光照主题、基地 / 轨道双尺度场景，支持点火升空跟拍：
+
+| 晨昏 · 基地全景 | 基座 · 三主塔集群 |
+| :---: | :---: |
+| ![基地全景](docs/screenshots/overview.png) | ![基座](docs/screenshots/base.png) |
+| **轿厢近景** | **轨道尺度 · 空间站** |
+| ![轿厢](docs/screenshots/car.png) | ![轨道空间站](docs/screenshots/orbit.png) |
+| **深夜主题 · 主塔灯光** | |
+| ![深夜](docs/screenshots/night.png) | |
+
 这是一个完全运行在浏览器里的实时 3D 场景：从赤道海上的 3 km 圆形基座、三座 2 km 主塔、十二座发射塔和 216 根缆索，到 36,000 km 的同步轨道站与 90,000 km 的配重，都可以通过鼠标或触屏自由旋转、缩放查看。
 
 本项目是非商业同人作品，不是电影官方产品。美术参考与版权说明见 [`docs/ART-REFERENCE.md`](docs/ART-REFERENCE.md)。

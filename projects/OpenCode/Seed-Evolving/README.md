@@ -2,6 +2,16 @@
 
 基于 **Three.js + Vite + TypeScript** 的程序化 3D 太空电梯查看器，依据电影官方美术设定稿（见 `docs/`）用几何体程序化重建，**不包含任何电影原始模型/贴图资产**，仅供学习。
 
+## 效果预览
+
+黄昏电影调色 + god rays 体积光束，点击 3D 热点即可聚焦各部件：
+
+| 黄昏 · 全景尺度 | 海上基地近景 |
+| :---: | :---: |
+| ![全景](docs/screenshots/overview.png) | ![海上基地](docs/screenshots/base.png) |
+| **方舟空间站** | **跟随爬升轿厢** |
+| ![方舟空间站](docs/screenshots/station.png) | ![跟随轿厢](docs/screenshots/follow.png) |
+
 ## 功能
 
 - 🖱️ 鼠标 / 触屏拖拽旋转、滚轮 / 双指缩放、右键 / 双指平移（OrbitControls，含阻尼与限位）

@@ -33,10 +33,10 @@ function run(cmd, args, cwd) {
   if (r.status !== 0) throw new Error(`${cmd} ${args.join(' ')} failed (exit ${r.status}) in ${cwd}`);
 }
 
-function copyDirContents(src, dest) {
+function copyDirContents(src, dest, { skip = new Set() } = {}) {
   mkdirSync(dest, { recursive: true });
   for (const name of readdirSync(src)) {
-    if (name === '.DS_Store') continue;
+    if (name === '.DS_Store' || skip.has(name)) continue;
     cpSync(join(src, name), join(dest, name), { recursive: true });
   }
 }
@@ -67,7 +67,8 @@ for (const p of PROJECTS) {
   } else if (p.type === 'static') {
     if (mode === 'install') { results.push({ ...p, status: 'static' }); continue; }
     console.log('-> copy static package');
-    copyDirContents(src, out);
+    // docs/（README 效果截图等）只随源码存档，不进入网页产物
+    copyDirContents(src, out, { skip: new Set(['docs', '.gitignore']) });
   } else {
     throw new Error(`${p.id}: unknown project type "${p.type}"`);
   }

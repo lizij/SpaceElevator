@@ -41,6 +41,7 @@ dist/                   唯一部署产物（gitignore），可整体静态托�
 | `npm run build` | 安装（按需）→ 构建 → 汇总 `dist/` → 注入返回按钮 → 生成首页 |
 | `npm run serve` | 零依赖静态服务器预览整个合集（默认 http://127.0.0.1:4177/） |
 | `npm run thumbs` | 用 Playwright 统一重拍卡片缩略图（需先 `npm run serve`），可加 id 参数只拍某个 |
+| `node scripts/capture-readme-shots.mjs` | 按 registry 的 `readmeShots` 拍各项目 README 效果图到 `projects/<…>/docs/screenshots/`（可加 id） |
 | `npm run audit` | 公开发布前审计（敏感串、私钥、内网地址、禁用文件类型、图片内嵌文本），必须 0 命中 |
 
 子项目内部仍是普通 Vite 工程，可进入其目录用 `npm run dev/build` 单独开发，
@@ -53,8 +54,9 @@ dist/                   唯一部署产物（gitignore），可整体静态托�
 2. 在 `projects.registry.mjs` 的 `PROJECTS` 末尾追加一条（字段含义见文件内注释）：
    `id / agent / model / dir / type / date / rounds / stack / highlights`，
    可选 `thumbQuery`（截图 URL 参数，如跳过开场）与 `extraEntries`（额外注入返回按钮的 html）。
-3. 运行 `npm run build`；另开终端 `npm run serve`；执行 `npm run thumbs <id>` 拍缩略图；
-   再 `npm run build` 让缩略图进入 `dist/`。
+3. 运行 `npm run build`；另开终端 `npm run serve`；执行 `npm run thumbs <id>` 拍卡片缩略图；
+   若配置了 `readmeShots`，再执行 `node scripts/capture-readme-shots.mjs <id>` 生成 README 效果图
+   （输出到该项目 `docs/screenshots/`，并在其 README 用相对路径引用）；最后再 `npm run build`。
 4. 浏览器从首页进入新作品，确认渲染正常、返回按钮可用、控制台无错误。
 
 ## 6. 工程约定
@@ -68,6 +70,9 @@ dist/                   唯一部署产物（gitignore），可整体静态托�
 - **首页零框架**：改卡片展示只动 `hub/` 与 `projects.registry.mjs`，不要引入前端框架或构建步骤。
 - 测试截图、帧序列、`node_modules/`、`dist/`、`.runtime/` 等生成物不入库；调研用的公开美术集、
   设定图、文档、迭代记录保留在各子项目 `docs/`/`references/` 中，但参考图不打进网页产物。
+- 两类截图分工：`hub/thumbs/` 是首页卡片图（随构建进入 `dist/`/gh-pages）；
+  各项目 `docs/screenshots/` 是 README 效果图（随 `main` 源码存档，不进入 `dist/`；
+  vite 项目天然不打包 docs，static 项目由构建器在拷贝时排除 `docs/`）。
 
 ## 7. 公开发布约束（硬性）
 

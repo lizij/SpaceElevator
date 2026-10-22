@@ -7,6 +7,16 @@
 > 本项目是「同一 Prompt × 不同 Agent+Model」实验合集的成员之一。
 > 实验环境：**Trae + GPT 6 Astra**。合集首页位于仓库根目录，由根目录统一构建（本地预览 + GitHub Pages 公开发布）。
 
+## 效果预览
+
+四个展台视角 + 可展开冰盾 / 进入舱内，画面沿航程滑块在地面与轨道间过渡：
+
+| 总览 · 压缩高度全系统 | 地面基地 |
+| :---: | :---: |
+| ![总览](docs/screenshots/overview.png) | ![地面基地](docs/screenshots/base.png) |
+| **运载轿厢 SEV-03** | **轨道平台** |
+| ![运载轿厢](docs/screenshots/climber.png) | ![轨道平台](docs/screenshots/station.png) |
+
 ## 本地运行
 
 需要 Node.js 22.12+。

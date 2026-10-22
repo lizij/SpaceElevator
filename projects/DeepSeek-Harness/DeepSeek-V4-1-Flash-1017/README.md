@@ -5,7 +5,17 @@
 > 本项目是「同一 Prompt × 不同 Agent+Model」实验合集的成员之一。
 > 实验环境：**DeepSeek Harness + DeepSeek V4.1 Flash 1017**。合集首页位于仓库根目录。
 
-![基座全景（合集构建后由统一截图流程生成）](../../../hub/thumbs/DeepSeek-Harness/DeepSeek-V4-1-Flash-1017.png)
+## 效果预览
+
+六个视图层级（从 90,000 km 末端配重到轿厢内景），另有结构剪影原型 [`blockout.html`](blockout.html)：
+
+| 全景（真实尺度） | 基座 · 三主塔与港池 |
+| :---: | :---: |
+| ![全景](docs/screenshots/overview.png) | ![基座](docs/screenshots/base.png) |
+| **轿厢 · 四角夹持单元** | **空间站 · 环形桁架** |
+| ![轿厢](docs/screenshots/cabin.png) | ![空间站](docs/screenshots/station.png) |
+| **内景 · 客舱过道** | |
+| ![内景](docs/screenshots/interior.png) | |
 
 从赤道海面 3 km 基座，到 36,000 km 的 GEO 空间站，再到 90,000 km 末端配重；包含三主塔、十二组发射塔、216 根缆索、九部轿厢和轿厢内景。
 
