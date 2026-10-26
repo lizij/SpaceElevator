@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101d22" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="description" content="基于公开美术设定的《流浪地球2》太空电梯 Web 3D 非商业同人研究。" />
+    <title>太空电梯 / SPACE ELEVATOR</title>
+  </head>
+  <body>
+    <main id="app">
+      <div id="scene" aria-label="太空电梯交互式三维场景"></div>
+      <div class="vignette" aria-hidden="true"></div>
+      <header class="masthead">
+        <a class="wordmark" href="./" aria-label="太空电梯首页"><span class="brand-mark">↟</span><span>地球往事<span class="wordmark-sub">THE WANDERING EARTH</span></span><span class="edition">II</span></a>
+        <div class="header-right"><span class="status-dot"></span> INTERACTIVE ARCHIVE <span class="archive-no">/ 001</span><button id="about-open" class="icon-button" aria-label="资料与项目说明">i</button></div>
+      </header>
+
+      <section class="intro">
+        <div class="eyebrow"><span></span> 行星级工程 · 视觉研究</div>
+        <h1>太空电梯</h1>
+        <p class="english-title">SPACE<br />ELEVATOR<span class="title-period">.</span></p>
+        <p class="intro-copy">从海洋，到星空。<br />一条属于人类的宇宙级高速公路。</p>
+        <div class="intro-rule"></div>
+        <div class="specs"><div><strong>90,000<span> KM</span></strong><span>地表至配重端</span></div><div><strong>216<span> LINES</span></strong><span>碳纳米缆索</span></div></div>
+        <button id="structure-open" class="text-button">探索整体结构 <span>↗</span></button>
+      </section>
+
+      <aside class="view-nav" aria-label="预设视角">
+        <span class="vertical-caption">OBSERVATION POINTS</span>
+        <button data-view="overview" class="view-button active" aria-pressed="true"><span class="view-number">01</span><span>海面全景<small>THE FOUNDATION</small></span><span class="view-indicator"></span></button>
+        <button data-view="tower" class="view-button" aria-pressed="false"><span class="view-number">02</span><span>主塔结构<small>THE TOWERS</small></span><span class="view-indicator"></span></button>
+        <button data-view="launch" class="view-button" aria-pressed="false"><span class="view-number">03</span><span>弹射平台<small>THE LAUNCHPAD</small></span><span class="view-indicator"></span></button>
+        <button data-view="climber" class="view-button" aria-pressed="false"><span class="view-number">04</span><span>电梯轿厢<small>THE CLIMBER</small></span><span class="view-indicator"></span></button>
+        <button data-view="interior" class="view-button" aria-pressed="false"><span class="view-number">05</span><span>轿厢内部<small>INSIDE THE CLIMBER</small></span><span class="view-indicator"></span></button>
+      </aside>
+
+      <section class="experience-panel" aria-label="发射与舱内体验">
+        <div class="experience-actions"><button id="launch-trigger">发射演示 <span>↗</span></button><button id="enter-cabin">进入轿厢 <span>→</span></button></div>
+        <div id="launch-controls" hidden>
+          <div class="launch-status"><span id="launch-phase" role="status" aria-live="polite">准备就绪</span><span id="launch-time">00.0 / 15.0 S</span><button id="launch-reset" title="复位发射装置">复位</button></div>
+          <input id="launch-seek" type="range" min="0" max="15" step="0.05" value="0" aria-label="发射演示进度；拖动暂停并查看该时刻" />
+          <div class="launch-note"><label><input id="launch-follow" type="checkbox" checked /> 跟随轿厢</label><span>塔侧助推 / 压缩时序 · 非真实速度</span></div>
+        </div>
+      </section>
+      <section id="interior-controls" class="interior-controls" aria-label="舱内区域" hidden>
+        <div class="interior-eyebrow">CABIN ARCHIVE / 舱内研究</div>
+        <div class="compartments"><button data-cabin="passenger" aria-pressed="true">乘客舱</button><button data-cabin="control" aria-pressed="false">操控舱</button><button data-cabin="cargo" aria-pressed="false">货舱</button></div>
+        <p>据公开内饰设定重建 · 布局与尺寸为视觉近似</p>
+      </section>
+
+      <div id="labels" aria-hidden="true"></div>
+      <div class="scene-caption"><span class="caption-line"></span><span id="caption-title">赤道海上基座</span><span id="caption-detail">三塔结构 / 地表端</span></div>
+
+      <footer class="control-deck">
+        <div class="location"><span class="location-symbol">⊕</span><div>EARTH · EQUATOR<span>海面端结构研究 <b>非官方同人</b></span></div></div>
+        <div class="tools" aria-label="场景设置">
+          <button id="reset" title="重置当前视角" aria-label="重置当前视角"><span>↺</span><small>重置</small></button>
+          <button id="auto" aria-pressed="false" title="自动环绕"><span>◌</span><small>环绕</small></button>
+          <button id="motion" aria-pressed="true" title="暂停轿厢运行"><span id="motion-icon">Ⅱ</span><small id="motion-text">暂停</small></button>
+          <span class="tool-divider"></span>
+          <button id="light" aria-pressed="false" title="切换昼夜"><span>☼</span><small>昼夜</small></button>
+          <button id="annotations" aria-pressed="false" title="显示结构标注"><span>⌖</span><small>标注</small></button>
+          <button id="fullscreen" title="全屏" aria-label="切换全屏"><span>⛶</span><small>全屏</small></button>
+        </div>
+        <div class="interaction-hint"><span class="mouse-symbol"></span><span>拖动旋转 <i>·</i> 滚轮缩放<small>右键平移 / 触屏双指缩放与平移</small></span></div>
+      </footer>
+
+      <div id="loading" class="loading"><span class="loader-orbit"></span><p>正在构建太空电梯<span>ASSEMBLING THE FUTURE</span></p></div>
+      <div id="error" class="error-panel" role="alert" hidden><h2>无法启动三维场景</h2><p>请使用支持 WebGL 2 的浏览器，并启用硬件加速。</p><button onclick="location.reload()">重新尝试</button></div>
+
+      <dialog id="structure-dialog" class="structure-dialog">
+        <button class="dialog-close" aria-label="关闭">×</button>
+        <div class="eyebrow">ENGINEERING OVERVIEW / 结构档案</div><h2>从海洋，到星空。</h2><p class="dialog-lead">五个核心部分，连接地球与宇宙。</p>
+        <div class="structure-layout"><div class="diagram"><div class="diagram-counterweight"></div><div class="diagram-cable"></div><div class="diagram-station"></div><div class="diagram-car"></div><div class="diagram-base"></div><span class="diagram-earth"></span><span class="diagram-note">纵向非等比例示意</span></div><ol class="structure-list"><li><span>05</span><div><h3>尾端配重 <small>90,000 KM</small></h3><p>利用离心作用维持缆索张紧，与地球自转同步。</p></div></li><li><span>04</span><div><h3>同步轨道空间站 <small>36,000 KM</small></h3><p>与电梯同心纵向连接，作为人员与物资的轨道枢纽。</p></div></li><li><span>03</span><div><h3>电梯轿厢 <small>9 CLIMBERS</small></h3><p>沿缆索往返，运送人员、物资及空间站建造材料。</p></div></li><li><span>02</span><div><h3>碳纳米缆索 <small>216 LINES</small></h3><p>粗细不等的缆绳，将海面基座与太空端连接。</p></div></li><li><span>01</span><div><h3>海面基座 <small>Ø 3 KM / H 2 KM</small></h3><p>三根主塔、十二组发射塔与圆形平台。当前三维场景重点还原此部分。</p></div></li></ol></div>
+        <p class="dialog-footnote">数值据“电影流浪地球”公开设定说明。海面场景截取低空段，未绘制等比例的 9 万公里全长。</p>
+      </dialog>
+      <dialog id="about-dialog">
+        <button class="dialog-close" aria-label="关闭">×</button><div class="eyebrow">ABOUT THE ARCHIVE</div><h2>以公开设定为起点。</h2><p>这是一个《流浪地球2》太空电梯的非商业 Web 3D 同人研究，使用程序化几何与材质重新构建海面端结构。并非电影原始模型，也不代表官方授权。</p><h3>参考资料</h3><a href="https://www.gcores.com/articles/161691" target="_blank" rel="noopener noreferrer">电影流浪地球 · 太空电梯美术设定 ↗</a><a href="https://xinwen.bjd.com.cn/content/s63de3ca2e4b0ed71f92883c0.html" target="_blank" rel="noopener noreferrer">北京日报 · 公开美术设定摘页 ↗</a><h3>还原与取舍</h3><p>重点：三塔基座、十二组弹射装置、216 根缆索与白色四角驱动轿厢。新增塔侧助推发射演示，以及据公开内饰图重建的乘客舱、操控舱与货舱。内外场景采用不同观察尺度，布局、尺寸、发射时序与机械运动是视觉近似，并非工程仿真。空间站及尾端配重仅在结构示意中说明。</p><p class="dialog-footnote">电影片名与美术相关权利归原权利人所有。参考图未随网站再分发。<br />Built with Three.js · OpenCode / GPT-6-1-Sol</p>
+      </dialog>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

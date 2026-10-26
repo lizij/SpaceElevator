@@ -14,6 +14,7 @@
 | Trae | GPT 6 Astra | [`projects/Trae/GPT-6-Astra/`](projects/Trae/GPT-6-Astra/) |
 | OpenCode | Seed-Evolving | [`projects/OpenCode/Seed-Evolving/`](projects/OpenCode/Seed-Evolving/) |
 | Claude | Opus 5.5 | [`projects/Claude/Opus-5-5/`](projects/Claude/Opus-5-5/)（预构建静态归档） |
+| OpenCode | GPT-6-1-Sol | [`projects/OpenCode/GPT-6-1-Sol/`](projects/OpenCode/GPT-6-1-Sol/) |
 
 从合集首页可以进入任一作品观看实现效果；每个作品页面顶部居中都有一个「合集首页」返回圆点
 （鼠标悬停/键盘聚焦展开文字），点击即回到首页。
@@ -42,9 +43,16 @@
 npm install            # 安装合集编排脚本依赖（playwright-core，仅截图用）
 npm run install:all    # 为全部子项目安装依赖（首次需要）
 npm run build          # 构建全部项目并汇总到 dist/
-npm run thumbs         # （可选）统一重拍首页缩略图，需要先 npm run serve
 npm run serve          # 本地预览整个合集 → http://127.0.0.1:4177/
-npm run audit          # 敏感信息扫描（projects/ 与 dist/）
+```
+
+保持预览服务运行，在另一个终端按需截图并审计：
+
+```bash
+npm run thumbs         # （可选）统一重拍首页缩略图，可加实验 id 只拍某个作品
+npm run build          # 重拍后让缩略图进入 dist/
+npm run audit          # 源码、文档和图片元数据的公开发布审计
+node scripts/audit-sensitive.mjs --dist  # 同时审计根构建产物
 ```
 
 `npm run build` 会：为每个 Vite 子项目执行 `npm install`（按需，显式使用公共 npm registry）
@@ -68,8 +76,18 @@ npm run build     # 仅构建该项目
 ## 部署到 GitHub Pages
 
 仓库已含 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)：push 到 `main`
-即自动执行 `npm run build` 并把 `dist/` 发布到 GitHub Pages。首次使用需要在仓库
-**Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
+即自动执行 `npm run build`，由 `peaceiris/actions-gh-pages` 把 `dist/` 推送到远程
+`gh-pages` 分支，产物直接位于该分支根目录。
+
+**新仓库首次上线必须手动配置一次 Pages 发布源**。workflow 成功、`gh-pages` 分支存在，
+不等于站点已启用。确认 Deploy 工作流成功后，打开 **Settings → Pages → Build and deployment**：
+
+1. **Source** 选择 **Deploy from a branch**（不是 GitHub Actions）；
+2. **Branch** 选择 **`gh-pages`**，目录选择 **`/ (root)`**；
+3. 点击 **Save**，等待站点生效。
+
+此后每次 push 到 `main` 都会自动更新，无需再次设置。部署与排障细节以
+[`AGENTS.md`](AGENTS.md) 第 8 节为准。
 
 所有资源均使用相对路径（`base: './'`），站点部署在仓库项目页子路径
 （`https://<user>.github.io/<repo>/`）下也能正常访问。也可把 `dist/` 托管到任意静态托管。
@@ -100,9 +118,18 @@ npm run build     # 仅构建该项目
 
    ```bash
    npm run build      # 自动构建并汇总，首页出现新卡片
-   npm run serve      # 另开终端
-   npm run thumbs     # 为新作品（可加 id 参数）统一重拍缩略图
-   npm run build      # 让缩略图进入 dist/
+   npm run serve      # 保持服务运行
+   ```
+
+   在另一个终端执行：
+
+   ```bash
+   npm run thumbs -- <id>  # 只拍新作品
+   # 如已配置 readmeShots，生成子项目 README 效果图：
+   node scripts/capture-readme-shots.mjs <id>
+   npm run build          # 让首页缩略图进入 dist/
+   npm run audit
+   node scripts/audit-sensitive.mjs --dist
    ```
 
 ### 接入要求（公开开源约束）
@@ -112,8 +139,11 @@ npm run build     # 仅构建该项目
 - 不包含个人身份信息、鉴权凭据、机器相关的绝对路径或其它不适合公开的内容；
   提交前运行 `npm run audit`，必须 0 命中。
 - Vite 项目保持 `base: './'`；预构建静态包需保证资源相对路径加载、外部运行时探测已静默。
-- 美术集/设定图等调研资料可放入项目 `docs/`（采集自公开网页、仅作非商业同人研究），
-  但不要把参考图打进网页产物。
+- 允许公开保存的美术参考和研究笔记可放入项目 `docs/`；公开可访问不等于获准再分发，
+  未明确获准再分发的参考图只用于本地研究，公开仓库保留来源链接和笔记。
+  不下载或收录盗版商业美术集，不把参考图打进网页产物。
+- `hub/thumbs/` 是随构建部署的首页卡片图；子项目 `docs/screenshots/` 是随源码保存的
+  README 效果图，不进入网页产物。测试截图、日志与缓存不入库。
 
 ## 版权
 

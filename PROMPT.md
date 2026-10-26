@@ -13,5 +13,6 @@
 | Trae | GPT 6 Astra | `projects/Trae/GPT-6-Astra/` |
 | OpenCode | Seed-Evolving | `projects/OpenCode/Seed-Evolving/` |
 | Claude | Opus 5.5 | `projects/Claude/Opus-5-5/` |
+| OpenCode | GPT-6-1-Sol | `projects/OpenCode/GPT-6-1-Sol/` |
 
 所有实验产物均为非官方同人作品，与电影出品方无隶属或授权关系；《流浪地球2》片名、美术设定及相关权利归各自权利人所有。合集仅用于技术学习与 Agent 能力横评。

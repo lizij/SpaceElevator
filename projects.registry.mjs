@@ -116,6 +116,30 @@ export const PROJECTS = [
       { file: 'earth-moon', clickText: 'button', text: '地月尺度全景', wait: 9000 },
     ],
   },
+  {
+    id: 'opencode-gpt61-sol',
+    agent: 'OpenCode',
+    model: 'GPT-6-1-Sol',
+    dir: ['OpenCode', 'GPT-6-1-Sol'],
+    type: 'vite',
+    date: '2026-10-22',
+    rounds: '原始 Prompt 首轮 + 反馈后 3 轮迭代 + 发射/内饰增强',
+    stack: 'JavaScript · Three.js 0.180 · Vite 7（无框架）',
+    highlights: ['五机位 · 三塔、216 根缆索与九部轿厢', '可控塔侧助推发射 · 乘客/操控/货舱内饰', '独立 PBR 通道与 HDR/4× MSAA · 鼠标/多点触控'],
+    thumbShot: '海面全景 / 暂停轿厢',
+    thumbQuery: '?view=overview&motion=0',
+    readmeShots: [
+      { file: 'overview', url: '?view=overview&motion=0', wait: 9000 },
+      { file: 'tower', url: '?view=tower&motion=0', wait: 6000 },
+      { file: 'launch', url: '?view=launch&motion=0', wait: 6000 },
+      { file: 'launch-boost', url: '?view=launch&launch=4.8&motion=0', wait: 6000 },
+      { file: 'climber', url: '?view=climber&motion=0', wait: 6000 },
+      { file: 'interior-passenger', url: '?view=interior&cabin=passenger&motion=0', wait: 6000 },
+      { file: 'interior-control', url: '?view=interior&cabin=control&motion=0', wait: 6000 },
+      { file: 'interior-cargo', url: '?view=interior&cabin=cargo&motion=0', wait: 6000 },
+      { file: 'night', url: '?view=overview&night=1&motion=0', wait: 6000 },
+    ],
+  },
 ];
 
 /** 项目源目录（projects/<agent>/<model>） */
