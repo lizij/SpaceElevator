@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>流浪地球2 太空电梯 3D</title>
+  <meta property="og:title" content="流浪地球2 太空电梯 3D">
+  <meta property="og:description" content="可交互的流浪地球2太空电梯3D模型（同人非官方），支持鼠标/触屏拖动、缩放查看细节">
+  <meta property="og:image" content="./client/assets/avatar.svg">
+  <meta name="description" content="可交互的流浪地球2太空电梯3D模型（同人非官方），支持鼠标/触屏拖动、缩放查看细节">
+  <link rel="icon" href="./client/assets/avatar.svg">
+  <script type="module" crossorigin src="./client/assets/index-D8zlHlKZ.js"></script>
+  <link rel="modulepreload" crossorigin href="./client/assets/rolldown-runtime-hePW80VL.js">
+  <link rel="modulepreload" crossorigin href="./client/assets/radix-DnUCoZvw.js">
+  <link rel="modulepreload" crossorigin href="./client/assets/toolkit-gGykLT-I.js">
+  <link rel="stylesheet" crossorigin href="./client/assets/index-DMCXvGwX.css">
+  <script>
+    // 兼容以 /index.html 结尾的直达链接：规范化为目录路径，保证应用内路由匹配根路径
+    (function () {
+      if (/\/index\.html$/i.test(location.pathname)) {
+        history.replaceState(null, '',
+          location.pathname.replace(/index\.html$/i, '') + location.search + location.hash);
+      }
+    })();
+  </script>
+  <script>
+    // 独立静态归档运行：页面是纯前端 3D 应用，不依赖任何平台后端。
+    // 静默平台 SDK 死代码对运行时接口的探测，保证任意静态托管（含 GitHub Pages）下无报错噪音。
+    (function () {
+      function stubFor(url) {
+        if (/current_server_timestamp/.test(url)) {
+          return { status_code: 0, code: 0, data: { timestampNs: String(BigInt(Date.now()) * 1000000n) } };
+        }
+        if (/get_published/.test(url)) {
+          return { status_code: '0', code: 0, data: { app_runtime_extra: { bucket: { default_bucket_id: 'local' } } } };
+        }
+        if (/lark\/user_info|account/.test(url)) {
+          return { code: 0, data: { user_info: { user_id: 'local', name: '', avatar: '' } } };
+        }
+        if (/observability|collect/.test(url)) {
+          return { status_code: 0, code: 0 };
+        }
+        if (/routes\.json/.test(url)) return null;
+        return { code: 0, status_code: 0, data: {} };
+      }
+      var RUNTIME_RE = /\/(__runtime__|spark)\/|routes\.json/;
+      var of = window.fetch;
+      window.fetch = function (input, init) {
+        var url = typeof input === 'string' ? input : (input && input.url) || '';
+        if (RUNTIME_RE.test(url)) {
+          var body = stubFor(url);
+          if (body === null) return Promise.resolve(new Response('null', { status: 404, headers: { 'content-type': 'application/json' } }));
+          return Promise.resolve(new Response(JSON.stringify(body), {
+            status: 200, headers: { 'content-type': 'application/json' },
+          }));
+        }
+        return of.apply(this, arguments);
+      };
+    })();
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+<!-- data-se-hub-chrome: 合集返回按钮（构建时注入） -->
+<style>
+  #se-back-home{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:2147483000;
+    display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+    min-width:32px;height:32px;padding:0 9px;border-radius:999px;text-decoration:none;
+    color:#e8f1f7;font:600 12px/1 -apple-system,"PingFang SC","Noto Sans SC",system-ui,sans-serif;letter-spacing:.04em;
+    background:rgba(8,14,20,.45);border:1px solid rgba(180,205,225,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 3px 14px rgba(0,0,0,.3);opacity:.55;overflow:hidden;white-space:nowrap;
+    transition:opacity .2s,background .2s,border-color .2s;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none}
+  #se-back-home:hover,#se-back-home:focus-visible{opacity:1;background:rgba(22,34,46,.85);border-color:rgba(255,255,255,.55);outline:none}
+  #se-back-home svg{width:14px;height:14px;flex:none}
+  #se-back-home .se-bh-txt{max-width:0;opacity:0;margin-left:0;transition:max-width .22s ease,opacity .18s ease,margin-left .22s ease}
+  #se-back-home:hover .se-bh-txt,#se-back-home:focus-visible .se-bh-txt{max-width:120px;opacity:1;margin-left:7px}
+</style>
+<a id="se-back-home" href="../../../index.html" aria-label="返回合集首页" title="返回合集首页">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  <span class="se-bh-txt">合集首页</span>
+</a></body>
+</html>

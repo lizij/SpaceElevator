@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>太空电梯实验合集 · Space Elevator Agent Lab</title>
+  <meta name="description" content="同一句话 Prompt × 不同 Agent + Model：流浪地球2太空电梯 Web 3D 实验合集" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2v28M4 8h24M7 15h18M10 22h12' stroke='%237fd4ff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+:root {
+  --bg: #04070c;
+  --panel: rgba(13, 22, 31, .72);
+  --line: rgba(150, 190, 215, .18);
+  --line-strong: rgba(150, 200, 230, .4);
+  --txt: #e6eff6;
+  --txt-dim: #93a7b6;
+  --cyan: #7fd4ff;
+  --cyan-deep: #2f8fbf;
+  --amber: #ffc46b;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ---------- 背景 ---------- */
+.bg-stars {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(1px 1px at 78% 12%, rgba(255,255,255,.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 45% 8%, rgba(255,255,255,.7), transparent 60%),
+    radial-gradient(1px 1px at 88% 45%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 65% 75%, rgba(255,255,255,.6), transparent 60%),
+    radial-gradient(1px 1px at 8% 85%, rgba(255,255,255,.5), transparent 60%),
+    radial-gradient(1px 1px at 92% 88%, rgba(255,255,255,.7), transparent 60%);
+}
+.bg-arc {
+  position: fixed; z-index: 0; pointer-events: none;
+  left: 50%; bottom: -52vw; width: 130vw; height: 130vw;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(127, 212, 255, .08);
+  box-shadow: inset 0 0 220px rgba(47, 143, 191, .12), 0 0 120px rgba(47, 143, 191, .06);
+}
+.bg-arc::before, .bg-arc::after {
+  content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(127, 212, 255, .06);
+}
+.bg-arc::before { inset: 8%; }
+.bg-arc::after { inset: 17%; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; z-index: 1;
+  max-width: 980px; margin: 0 auto; padding: 88px 28px 36px;
+  text-align: center;
+}
+.eyebrow {
+  margin: 0 0 18px; font-size: 11px; letter-spacing: .32em; color: var(--cyan);
+  text-transform: uppercase; opacity: .85;
+}
+.hero h1 {
+  margin: 0; font-size: clamp(30px, 5.4vw, 54px); line-height: 1.22; font-weight: 700;
+  letter-spacing: .01em; text-shadow: 0 0 40px rgba(127, 212, 255, .15);
+}
+.hl {
+  background: linear-gradient(100deg, var(--cyan), #b7e8ff 45%, var(--amber));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.sub { max-width: 720px; margin: 22px auto 0; color: var(--txt-dim); font-size: 15px; }
+
+.prompt-card {
+  margin: 34px auto 0; max-width: 760px; text-align: left;
+  background: linear-gradient(160deg, rgba(127,212,255,.08), rgba(13,22,31,.6) 55%);
+  border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px;
+  position: relative;
+}
+.prompt-card::before {
+  content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px;
+  background: linear-gradient(var(--cyan), transparent); border-radius: 2px;
+}
+.prompt-card figcaption {
+  font-size: 11px; letter-spacing: .28em; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px;
+}
+.prompt-card blockquote { margin: 0; font-size: 15.5px; color: #d7e5ef; }
+
+.hero-meta {
+  margin-top: 22px; display: flex; gap: 10px 22px; justify-content: center; flex-wrap: wrap;
+  font-size: 12.5px; color: var(--txt-dim); letter-spacing: .03em;
+}
+.hero-meta b { color: var(--cyan); font-size: 15px; }
+
+/* ---------- 卡片 ---------- */
+main { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 30px 28px 70px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 26px; }
+
+.card {
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-5px); border-color: var(--line-strong);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .5), 0 0 0 1px rgba(127, 212, 255, .08);
+}
+.card-thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0a1018; }
+.card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
+.card:hover .card-thumb img { transform: scale(1.04); }
+.thumb-fallback {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: #284252; font-size: 13px; letter-spacing: .2em;
+  background: radial-gradient(circle at 50% 120%, rgba(47,143,191,.25), #0a1018 70%);
+}
+.card-idx {
+  position: absolute; left: 12px; top: 10px; font-size: 11px; letter-spacing: .2em;
+  color: var(--cyan); background: rgba(5,10,15,.66); border: 1px solid var(--line);
+  padding: 3px 9px; border-radius: 999px; backdrop-filter: blur(6px);
+}
+
+.card-body { display: flex; flex-direction: column; gap: 12px; padding: 18px 20px 20px; flex: 1; }
+.card-title { margin: 0; font-size: 17.5px; font-weight: 650; letter-spacing: .01em; }
+.badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.badge {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; line-height: 1.3;
+  padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); color: #cfe0ec;
+  background: rgba(127, 212, 255, .06);
+}
+.badge .k { color: var(--txt-dim); font-size: 10.5px; letter-spacing: .08em; }
+.badge.agent { border-color: rgba(127, 212, 255, .35); }
+.badge.model { border-color: rgba(255, 196, 107, .3); background: rgba(255, 196, 107, .06); }
+.badge.model .k { color: #c9a46e; }
+
+.card-meta { font-size: 12px; color: var(--txt-dim); display: flex; gap: 8px; flex-wrap: wrap; }
+.card-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: #3d5566; }
+.card-highlights { margin: 0; padding-left: 17px; font-size: 13px; color: #b9cad6; }
+.card-highlights li { margin: 3px 0; }
+.card-stack { font-size: 11.5px; color: #6f8494; letter-spacing: .02em; }
+
+.card-cta {
+  margin-top: auto; padding-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+}
+.btn-enter {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  padding: 10px 18px; border-radius: 10px; font-size: 13.5px; font-weight: 600; letter-spacing: .05em;
+  color: #041018; background: linear-gradient(100deg, var(--cyan), #a8e4ff);
+  transition: filter .2s, transform .2s;
+}
+.btn-enter:hover { filter: brightness(1.08); transform: translateX(2px); }
+.btn-enter svg { width: 15px; height: 15px; }
+.card-date { font-size: 11.5px; color: #667d8d; letter-spacing: .06em; }
+
+/* ---------- footer ---------- */
+.site-footer {
+  position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 30px 28px 60px;
+  text-align: center; color: #5f7484; font-size: 12px;
+  border-top: 1px solid rgba(150,190,215,.08);
+}
+.site-footer p { margin: 6px 0; }
+
+@media (max-width: 640px) {
+  .hero { padding-top: 56px; }
+  .grid { grid-template-columns: 1fr; gap: 20px; }
+  main { padding: 18px 16px 50px; }
+}
+
+</style>
+</head>
+<body>
+  <div class="bg-stars" aria-hidden="true"></div>
+  <div class="bg-arc" aria-hidden="true"></div>
+
+  <header class="hero">
+    <p class="eyebrow">THE WANDERING EARTH II · SPACE ELEVATOR · AGENT LAB</p>
+    <h1>同一句话 Prompt，<br />不同 <span class="hl">Agent × Model</span> 的太空电梯</h1>
+    <p class="sub">每个实验都由同一句提示词驱动 Agent 自主完成：研究美术集、编写代码、迭代还原、本地部署。点击卡片进入对应的 3D 作品，对比不同工具链与模型的一次性交付能力。</p>
+    <figure class="prompt-card">
+      <figcaption>原始 Prompt</figcaption>
+      <blockquote id="prompt-text"></blockquote>
+    </figure>
+    <div class="hero-meta">
+      <span><b id="project-count">5</b> 个实验</span>
+      <span>纯前端 · Three.js / React Three Fiber</span>
+      <span>同人非官方作品</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid" id="cards"><!-- hub.js 渲染 --></section>
+  </main>
+
+  <footer class="site-footer">
+    <p>本合集所有作品均为《流浪地球2》太空电梯的非商业同人重建，与电影出品方无隶属或授权关系；片名、美术设定及相关权利归各自权利人所有。</p>
+    <p>模型全部由代码程序化生成，美术集图版采集自公开网页，仅作学习研究与 Agent 能力横评。</p>
+  </footer>
+
+  <script type="application/json" id="se-data">{"prompt":"我想做一个web项目，渲染一个3d的流浪地球2电影中的太空电梯模型，可以使用鼠标或触屏拖动改变视角，可以放大缩小观看细节，尽可能还原电影，先下载官方美术集到docs/下研究下方案，然后启动开发测试，最后部署到本地预览","projects":[{"id":"dsh","agent":"DeepSeek Harness","model":"DeepSeek V4.1 Flash 1017","dir":["DeepSeek-Harness","DeepSeek-V4-1-Flash-1017"],"date":"2026-10-19","rounds":"12 轮自我迭代 + 最终评估","stack":"React 18 · React Three Fiber 8 · Three.js 0.169 · Zustand · Vite 5","highlights":["六层视图（全景/基座/轿厢/空间站/配重/内景）","12 秒发射演示与电影/工程双模式","216 根缆索、九部轿厢与可步入舱内景"]},{"id":"opencode-ark-ds41","agent":"OpenCode","model":"DeepSeek V4.1 Flash 1017","dir":["OpenCode","DeepSeek-V4-1-Flash-1017"],"date":"2026-10-20","rounds":"单轮交付 + Playwright 交互/移动端测试","stack":"TypeScript · Three.js 0.186 · Vite 8（无框架）","highlights":["基地 / 轨道双尺度场景","点火升空追车镜头与晨昏/深夜切换","程序化环境音、移动端竖屏标尺构图"]},{"id":"gpt","agent":"Trae","model":"GPT 6 Astra","dir":["Trae","GPT-6-Astra"],"date":"2026-10-20","rounds":"Revision 04 · 31 轮设定图对照迭代","stack":"TypeScript · Three.js 0.180 · Vite 7（无框架）","highlights":["42 座乘员舱与四个舱内观察位","SSAO/SMAA 自研画质管线与黑块回归验证","按官方图版逐项像素标定的轿厢/方舟/配重"]},{"id":"evolving","agent":"OpenCode","model":"Seed-Evolving","dir":["OpenCode","Seed-Evolving"],"date":"2026-10-19","rounds":"单轮交付","stack":"TypeScript · Three.js 0.170 · Vite 5（无框架）","highlights":["黄昏 god rays 体积光束与电影调色","门式发射塔与三轿厢同时运行","发射冲击波/蒸汽全屏演出、全局暂停"]},{"id":"op55","agent":"Claude","model":"Opus 5.5","dir":["Claude","Opus-5-5"],"date":"2026-10-21","rounds":"AI 应用平台生成产物的离线归档","stack":"React · Three.js（预构建包，零安装零构建）","highlights":["8 个预设视角 · 地月尺度全景","轿厢倍速 / 画质切换 / 结构标注","15 张 PBR 程序化贴图"]},{"id":"opencode-gpt61-sol","agent":"OpenCode","model":"GPT-6-1-Sol","dir":["OpenCode","GPT-6-1-Sol"],"date":"2026-10-22","rounds":"原始 Prompt 首轮 + 反馈后 3 轮迭代 + 发射/内饰增强","stack":"JavaScript · Three.js 0.180 · Vite 7（无框架）","highlights":["五机位 · 三塔、216 根缆索与九部轿厢","可控塔侧助推发射 · 乘客/操控/货舱内饰","独立 PBR 通道与 HDR/4× MSAA · 鼠标/多点触控"]}]}</script>
+  <script>
+/* 合集首页：数据由构建器内联到 #se-data，无运行时依赖 */
+(function () {
+  const dataEl = document.getElementById('se-data');
+  const data = JSON.parse(dataEl.textContent || '{}');
+  const projects = data.projects || [];
+
+  const promptEl = document.getElementById('prompt-text');
+  if (data.prompt && promptEl) promptEl.textContent = data.prompt;
+  const countEl = document.getElementById('project-count');
+  if (countEl) countEl.textContent = projects.length;
+
+  const grid = document.getElementById('cards');
+
+  const esc = (s) =>
+    String(s).replace(/[&<>"']/g, (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  grid.innerHTML = projects
+    .map((p, i) => {
+      const href = `projects/${p.dir.join('/')}/`;
+      const thumb = `thumbs/${p.dir.join('/')}.png`;
+      const highlights = (p.highlights || [])
+        .map((h) => `<li>${esc(h)}</li>`)
+        .join('');
+      return `
+      <article class="card">
+        <a class="card-thumb" href="${href}" aria-label="${esc(p.agent)} × ${esc(p.model)}">
+          <img src="${thumb}" alt="" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          <div class="thumb-fallback" style="display:none">THUMBNAIL PENDING</div>
+          <span class="card-idx">No.${String(i + 1).padStart(2, '0')}</span>
+        </a>
+        <div class="card-body">
+          <h2 class="card-title">${esc(p.agent)} × ${esc(p.model)}</h2>
+          <div class="badges">
+            <span class="badge agent"><span class="k">AGENT</span>&nbsp;${esc(p.agent)}</span>
+            <span class="badge model"><span class="k">MODEL</span>&nbsp;${esc(p.model)}</span>
+          </div>
+          <div class="card-meta">
+            <span>${esc(p.date)}</span><span class="dot"></span>
+            <span>${esc(p.rounds)}</span>
+          </div>
+          <ul class="card-highlights">${highlights}</ul>
+          <div class="card-stack">${esc(p.stack)}</div>
+          <div class="card-cta">
+            <a class="btn-enter" href="${href}">进入体验 ${arrow}</a>
+            <span class="card-date">${esc(p.date)}</span>
+          </div>
+        </div>
+      </article>`;
+    })
+    .join('');
+})();
+
+</script>
+</body>
+</html>
